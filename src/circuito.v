@@ -1,4 +1,4 @@
-module chip_SP(q_out, reset, clk, EN, clk_s, select);
+module tt_um_chip_SP(q_out, reset, clk, EN, clk_s, select);
 output [7:0] q_out;
 input reset;
 input clk;
