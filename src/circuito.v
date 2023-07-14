@@ -1,4 +1,4 @@
-module tt_um_chip_SP_NoelFPB(q_out, reset, clk, select);
+module chip_SP_NoelFPB(q_out, reset, clk, select);
 output [7:0] q_out;
 input reset;
 input clk;
