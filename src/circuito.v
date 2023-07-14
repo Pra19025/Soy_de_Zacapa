@@ -1,10 +1,11 @@
-module chip_SP_NoelFPB(q_out, reset, clk, select);
+module tt_um_chip_SP_NoelFPB(q_out, reset, clk, select, ena);
 output [7:0] q_out;
 input reset;
 input clk;
 input [1:0]select;
 reg [11:0] contador;
 reg [7:0] q;
+output ena;
 
 
 always @ (posedge reset or posedge clk)
