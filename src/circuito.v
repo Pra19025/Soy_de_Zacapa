@@ -1,4 +1,5 @@
-module tt_um_chip_SP(q_out, reset, clk, EN, clk_s, select);
+module tt_um_chip_SP(q_out, reset, clk, EN, select);
+
 output [7:0] q_out;
 input reset;
 input clk;
@@ -6,8 +7,7 @@ input [1:0]select;
 reg [11:0] contador;
 reg [7:0] q;
 input EN;
-output clk_s;
-assign clk_s = clk_G;
+
 always @ (posedge reset or posedge clk)
 if (reset)
 contador<=12'b000000000000;
