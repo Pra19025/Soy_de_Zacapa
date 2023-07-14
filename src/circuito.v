@@ -1,11 +1,17 @@
-module tt_um_chip_SP_NoelFPB(q_out, reset, clk, select, ena);
-output [7:0] q_out;
-input reset;
-input clk;
-input [1:0]select;
+module tt_um_chip_SP_NoelFPB(
+    input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
+    output wire [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
+    input  wire [7:0] uio_in,   // IOs: Bidirectional Input path
+    output wire [7:0] uio_out,  // IOs: Bidirectional Output path
+    output wire [7:0] uio_oe,   // IOs: Bidirectional Enable path (active high: 0=input, 1=output)
+    input  wire       ena,      // will go high when the design is enabled
+    input  wire       clk,      // clock
+    input  wire       rst_n     // reset_n - low to reset
+);
+
+wire[1:0]select;
+assign select = ui_in[1:0] 
 reg [11:0] contador;
-reg [7:0] q;
-output ena;
 
 
 always @ (posedge reset or posedge clk)
@@ -94,6 +100,6 @@ begin
 q<=8'b01100001;
 end
 end
-assign q_out = q;
+assign uo_out = q;
 endmodule
 
