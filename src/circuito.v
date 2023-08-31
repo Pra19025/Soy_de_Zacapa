@@ -9,9 +9,15 @@ module tt_um_chip_SP_NoelFPB(
     input  wire       rst_n     // reset_n - low to reset
 );
 
+
+    
 wire[1:0]select;
 assign select = ui_in[1:0] 
 reg [11:0] contador;
+// Assign the input.
+assign uio_out = 8'h00;
+assign uo_out = 8'h00;
+assign uio_oe = 8'h00;
 
 
 always @ (posedge reset or posedge clk)
