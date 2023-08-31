@@ -16,6 +16,7 @@ module tt_um_chip_SP_NoelFPB(
 wire[1:0]select;
 assign select = ui_in[1:0]; 
 reg [11:0] contador;
+reg [7:0] q;
 // Assign the input.
 assign uio_out = 8'h00;
 assign uo_out = 8'h00;
