@@ -17,7 +17,7 @@ assign select = ui_in[1:0];
 
 reg [11:0] contador;
 reg [7:0] q;
-input EN;
+wire EN;
 wire W_1;
 wire W_2;
 wire W_3;
