@@ -67,7 +67,7 @@ INV  U19(W_18,W_19);
 INV  U20(W_19,clk_G);
 
 always @ (posedge  or posedge clk)
-if ()
+if (rst_n)
 contador<=12'b000000000000;
 else if(select==2'b00 || select==2'b11) begin
 if (contador <1545)
