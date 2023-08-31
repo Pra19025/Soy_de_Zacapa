@@ -11,7 +11,6 @@ module tt_um_chip_SP_NoelFPB(
     input  wire       rst_n     // rst_n_n - low to rst_n
 );
 
-output [7:0] q_out;
 input rst_n;
 input clk;
 input [1:0]select;
