@@ -12,7 +12,9 @@ module tt_um_chip_SP_NoelFPB(
 );
 
 
-input [1:0]select;
+wire[1:0]select;
+assign select = ui_in[1:0]; 
+
 reg [11:0] contador;
 reg [7:0] q;
 input EN;
@@ -40,7 +42,7 @@ wire clk_G;
 // Assign the input.
 assign uio_out[7:1] = 7'h00;
 assign uio_oe = 8'd1;
-assign EN = ui_in[0];
+assign EN = ui_in[2];
 
 assign uio_out[0] = clk_G;
 AND_2 U1(EN,EN,W_1);
