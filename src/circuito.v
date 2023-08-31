@@ -100,6 +100,6 @@ begin
 q<=8'b01100001;
 end
 end
-assign uo_out = q;
+    assign uo_out[7:0] = q;
 endmodule
 
