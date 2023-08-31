@@ -12,7 +12,6 @@ module tt_um_chip_SP_NoelFPB(
 );
 
 
-input clk;
 input [1:0]select;
 reg [11:0] contador;
 reg [7:0] q;
