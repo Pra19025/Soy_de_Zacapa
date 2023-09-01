@@ -55,21 +55,6 @@ module tt_um_chip_SP_NoelFPB(
     assign string[33] = 8'h20;
     assign string[34] = 8'h53;
     assign string[35] = 8'h61;
-    assign string[36] = 8'h6E;
-    assign string[37] = 8'h74;
-    assign string[38] = 8'h61;
-    assign string[39] = 8'h20;
-    assign string[40] = 8'h4D;
-    assign string[41] = 8'h61;
-    assign string[42] = 8'h72;
-    assign string[43] = 8'h69;
-    assign string[44] = 8'h61;
-    assign string[45] = 8'h20;
-    assign string[46] = 8'h41;
-    assign string[47] = 8'h67;
-    assign string[48] = 8'h75;
-    assign string[49] = 8'h61;
-    assign string[50] = 8'h20;
 
     // Output logic
     always @(posedge clk or negedge rst_n) begin
@@ -79,7 +64,7 @@ module tt_um_chip_SP_NoelFPB(
             uo_out <= 8'h00;
         end else if (ena) begin
             uo_out <= string[index];
-            if (index < 50) // Adjust this value based on the actual length of your string
+            if (index < 35) // Adjust this value based on the actual length of your string
                 index <= index + 1;
             else
                 index <= 0;
@@ -87,3 +72,4 @@ module tt_um_chip_SP_NoelFPB(
     end
 
 endmodule
+
