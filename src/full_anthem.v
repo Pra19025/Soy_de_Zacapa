@@ -18,7 +18,6 @@ wire decrease_duty;
 assign increase_duty = ui_in[0];
 assign decrease_duty = ui_in[1];
 
- output PWM_OUT;
  wire slow_clk_enable; // slow clock enable signal for debouncing FFs
  reg[27:0] counter_debounce=0;// counter for creating slow clock enable signals 
  wire tmp1,tmp2,duty_inc;// temporary flip-flop signals for debouncing the increasing button
