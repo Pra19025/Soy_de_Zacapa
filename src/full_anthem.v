@@ -37,7 +37,7 @@ module tt_um_chip_SP_NoelFPB(
         8'h53, 8'h61, 8'h6E, 8'h74, 8'h6F, 8'h20, 8'h54, 8'h6F, 8'h6D, 8'h61, 8'h73, 8'h20, // Santo Tomas
         8'h53, 8'h69, 8'h65, 8'h74, 8'h65, 8'h20, 8'h4F, 8'h72, 8'h65, 8'h6A, 8'h61, 8'h73, 8'h20, // Siete Orejas
         8'h43, 8'h65, 8'h72, 8'h72, 8'h6F, 8'h20, 8'h51, 8'h75, 8'h65, 8'h6D, 8'h61, 8'h64, 8'h6F, 8'h20, // Cerro Quemado
-        8'h54, 8'h6F, 8'h6C, 8'h69, 8'h6D, 8'h61, 8'h6E // Toliman
+        8'h54, 8'h6F, 8'h6C, 8'h69, 8'h6D, 8'h61, 8'h6E, // Toliman
 
         8'h4C, 8'h61, 8'h73, 8'h20, 8'h56, 8'h69, 8'h62, 8'h6F, 8'h72, 8'h61, 8'h73, 8'h20, // Las Viboras
         8'h43, 8'h75, 8'h6C, 8'h6D, 8'h61 // Culma
