@@ -23,7 +23,7 @@ module tt_um_chip_SP_NoelFPB(
     // Output logic
     always @(posedge clk or negedge rst_n) begin
 
-    string [0:255] = {
+    string = {
         8'h54, 8'h61, 8'h6A, 8'h75, 8'h6D, 8'h75, 8'h6C, 8'h63, 8'h6F, 8'h20, // Tajumulco
         8'h54, 8'h61, 8'h63, 8'h61, 8'h6E, 8'h61, 8'h20, // Tacana
         8'h41, 8'h63, 8'h61, 8'h74, 8'h65, 8'h6E, 8'h61, 8'h6E, 8'h67, 8'h6F, 8'h20, // Acatenango
