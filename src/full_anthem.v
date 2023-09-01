@@ -10,7 +10,6 @@ module tt_um_chip_SP_NoelFPB(
 );
 
     // Assign the input.
-    wire ena;
     assign uio_out = 8'h00;
     assign uio_oe = 8'h00;
     assign ena = ui_in[0];
