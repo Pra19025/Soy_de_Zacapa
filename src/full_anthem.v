@@ -10,19 +10,12 @@ module tt_um_chip_SP_NoelFPB(
     input  wire       clk,      // clock
     input  wire       rst_n     // rst_n_n - low to rst_n
 );
-
+    wire[1:0]select;
+    assign select = ui_in[1:0]; 
     // Assign the input.
     assign uio_out = 8'h00;
     assign uio_oe = 8'h00;
-
-    // State enumeration
-    typedef enum reg [1:0] {
-        IDLE = 2'b00,
-        RUN  = 2'b01
-    } state_type;
-
-    // State variables
-    state_type state, next_state;
+    reg [11:0] contador;
 
     // String and index
     reg [7:0] string [0:255] = {
@@ -34,39 +27,16 @@ module tt_um_chip_SP_NoelFPB(
         8'h41, 8'h67, 8'h75, 8'h61, 8'h20// Agua
     };
 
-    reg [7:0] index = 0;
-
-    // FSM logic
-    always @(posedge clk or negedge rst_n) begin
-        if (~rst_n)
-            state <= IDLE;
+    always @ (posedge rst_n or posedge clk)
+    if (rst_n)
+    contador<=12'b000000000000;
+    else if(select==2'b00 || select==2'b11) begin
+        if (contador <255)
+            uo_out <= string[contador];
+            contador <= contador + 1;
         else
-            state <= next_state;
-    end
-
-    // Next state logic
-    always @(*) begin
-        next_state = state;
-        case(state)
-            IDLE: begin
-                next_state = RUN;
-                index = 0;
-            end
-            RUN: begin
-                if (index < 255) // Adjust this value based on the length of your string
-                    next_state = RUN;
-                else
-                    next_state = IDLE;
-            end
-        endcase
-    end
-
-    // Output logic
-    always @(posedge clk) begin
-        if (state == RUN) begin
-            uo_out <= string[index];
-            index <= index + 1;
-        end
-    end
+            contador <= 0;
+    else
+        contador <= 0;
 
 endmodule
