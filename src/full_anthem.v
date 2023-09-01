@@ -16,7 +16,14 @@ module tt_um_chip_SP_NoelFPB(
     assign ena = ui_in[0];
 
     // String and index
-    reg [7:0] string [0:255] = {
+    reg [7:0] string [0:255];
+
+    reg [7:0] index = 0;
+
+    // Output logic
+    always @(posedge clk or negedge rst_n) begin
+
+    string [0:255] = {
         8'h54, 8'h61, 8'h6A, 8'h75, 8'h6D, 8'h75, 8'h6C, 8'h63, 8'h6F, 8'h20, // Tajumulco
         8'h54, 8'h61, 8'h63, 8'h61, 8'h6E, 8'h61, 8'h20, // Tacana
         8'h41, 8'h63, 8'h61, 8'h74, 8'h65, 8'h6E, 8'h61, 8'h6E, 8'h67, 8'h6F, 8'h20, // Acatenango
@@ -24,11 +31,6 @@ module tt_um_chip_SP_NoelFPB(
         8'h53, 8'h61, 8'h6E, 8'h74, 8'h61, 8'h20, 8'h4D, 8'h61, 8'h72, 8'h69, 8'h61, 8'h20, // Santa Maria
         8'h41, 8'h67, 8'h75, 8'h61, 8'h20// Agua
     };
-
-    reg [7:0] index = 0;
-
-    // Output logic
-    always @(posedge clk or negedge rst_n) begin
         if (~rst_n) begin
             index <= 0;
             uo_out <= 8'h00;
