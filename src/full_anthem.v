@@ -11,68 +11,70 @@ module tt_um_chip_SP_NoelFPB(
     input  wire       rst_n     // rst_n_n - low to rst_n
 );
 
-// Assign the input.
-assign uio_out = 8'h00;
-assign uio_oe = 8'h00;
-assign uo_out[7:1] = 7'h00;
 
-wire W_1;
-wire W_2;
-wire W_3;
-wire W_4;
-wire W_5;
-wire W_6;
-wire W_7;
-wire W_8;
-wire W_9;
-wire W_10;
-wire W_11;
-wire W_12;
-wire W_13;
-wire W_14;
-wire W_15;
-wire W_16;
-wire W_17;
-wire W_18;
-wire W_19;
-wire clk_G;
-wire EN;
+wire increase_duty;
+wire decrease_duty; 
 
-assign uo_out[0] = clk_G;
-assign EN = ui_in[0];
+assign increase_duty = ui_in[0];
+assign decrease_duty = ui_in[1];
 
-AND_2 U1(EN,EN,W_1);
-INV  U2(W_1,W_2);
-INV  U3(W_2,W_3);
-INV  U4(W_3,W_4);
-INV  U5(W_4,W_5);
-INV  U6(W_5,W_6);
-INV  U7(W_6,W_7);
-INV  U8(W_7,W_8);
-INV  U9(W_8,W_9);
-INV  U10(W_9,W_10);
-INV  U11(W_10,W_11);
-INV  U12(W_11,W_12);
-INV  U13(W_12,W_13);
-INV  U14(W_13,W_14);
-INV  U15(W_14,W_15);
-INV  U16(W_15,W_16);
-INV  U17(W_16,W_17);
-INV  U18(W_17,W_18);
-INV  U19(W_18,W_19);
-INV  U20(W_19,clk_G);
-
+ output PWM_OUT;
+ wire slow_clk_enable; // slow clock enable signal for debouncing FFs
+ reg[27:0] counter_debounce=0;// counter for creating slow clock enable signals 
+ wire tmp1,tmp2,duty_inc;// temporary flip-flop signals for debouncing the increasing button
+ wire tmp3,tmp4,duty_dec;// temporary flip-flop signals for debouncing the decreasing button
+ reg[3:0] counter_PWM=0;// counter for creating 10Mhz PWM signal
+ reg[3:0] DUTY_CYCLE=5; // initial duty cycle is 50%
+  // Debouncing 2 buttons for inc/dec duty cycle 
+  // Firstly generate slow clock enable for debouncing flip-flop (4Hz)
+ always @(posedge clk)
+ begin
+   counter_debounce <= counter_debounce + 1;
+   //if(counter_debounce>=25000000) then  
+   // for running on FPGA -- comment when running simulation
+   if(counter_debounce>=1) 
+   // for running simulation -- comment when running on FPGA
+    counter_debounce <= 0;
+ end
+ // assign slow_clk_enable = counter_debounce == 25000000 ?1:0;
+ // for running on FPGA -- comment when running simulation 
+ assign slow_clk_enable = counter_debounce == 1 ?1:0;
+ // for running simulation -- comment when running on FPGA
+ // debouncing FFs for increasing button
+ DFF_PWM PWM_DFF1(clk,slow_clk_enable,increase_duty,tmp1);
+ DFF_PWM PWM_DFF2(clk,slow_clk_enable,tmp1, tmp2); 
+ assign duty_inc =  tmp1 & (~ tmp2) & slow_clk_enable;
+ // debouncing FFs for decreasing button
+ DFF_PWM PWM_DFF3(clk,slow_clk_enable,decrease_duty, tmp3);
+ DFF_PWM PWM_DFF4(clk,slow_clk_enable,tmp3, tmp4); 
+ assign duty_dec =  tmp3 & (~ tmp4) & slow_clk_enable;
+ // vary the duty cycle using the debounced buttons above
+ always @(posedge clk)
+ begin
+   if(duty_inc==1 && DUTY_CYCLE <= 9) 
+    DUTY_CYCLE <= DUTY_CYCLE + 1;// increase duty cycle by 10%
+   else if(duty_dec==1 && DUTY_CYCLE>=1) 
+    DUTY_CYCLE <= DUTY_CYCLE - 1;//decrease duty cycle by 10%
+ end 
+// Create 10MHz PWM signal with variable duty cycle controlled by 2 buttons 
+ always @(posedge clk)
+ begin
+   counter_PWM <= counter_PWM + 1;
+   if(counter_PWM>=9) 
+    counter_PWM <= 0;
+ end
+ assign uo_out[0] = counter_PWM < DUTY_CYCLE ? 1:0;
 endmodule
 
-module INV(A, B);
-    input A;
-    output B;
-    assign B = ~A;
-endmodule
 
-module AND_2(in1, in2, out);
-    input in1, in2;
-    output out;
-    assign out = in1 & in2;
-endmodule
+// Debouncing DFFs for push buttons on FPGA
 
+module DFF_PWM(clk,en,D,Q);
+input clk,en,D;
+output reg Q;
+always @(posedge clk)
+begin 
+ if(en==1) // slow clock enable signal 
+  Q <= D;
+end 
+endmodule 
