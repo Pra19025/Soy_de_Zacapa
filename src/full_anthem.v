@@ -1,3 +1,5 @@
+`default_nettype none
+
 module tt_um_chip_SP_NoelFPB(
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
     output reg [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
@@ -30,11 +32,12 @@ module tt_um_chip_SP_NoelFPB(
         end 
         else if (ena) begin
             uo_out <= string;
-        end
         if (index < 1) // Adjust this value based on the actual length of your string
             index <= index + 1;
         else
             index <= 0;
+        end
+ 
     
     end
 
