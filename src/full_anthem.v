@@ -31,16 +31,7 @@ module tt_um_chip_SP_NoelFPB(
         8'h41, 8'h63, 8'h61, 8'h74, 8'h65, 8'h6E, 8'h61, 8'h6E, 8'h67, 8'h6F, 8'h20, // Acatenango
         8'h46, 8'h75, 8'h65, 8'h67, 8'h6F, 8'h20, // Fuego
         8'h53, 8'h61, 8'h6E, 8'h74, 8'h61, 8'h20, 8'h4D, 8'h61, 8'h72, 8'h69, 8'h61, 8'h20, // Santa Maria
-        8'h41, 8'h67, 8'h75, 8'h61, 8'h20, // Agua
-        8'h43, 8'h65, 8'h72, 8'h72, 8'h6F, 8'h20, 8'h5A, 8'h75, 8'h6E, 8'h69, 8'h6C, 8'h20, // Cerro Zunil
-        8'h41, 8'h74, 8'h69, 8'h74, 8'h6C, 8'h61, 8'h6E, 8'h20, // Atitlan
-        8'h53, 8'h61, 8'h6E, 8'h74, 8'h6F, 8'h20, 8'h54, 8'h6F, 8'h6D, 8'h61, 8'h73, 8'h20, // Santo Tomas
-        8'h53, 8'h69, 8'h65, 8'h74, 8'h65, 8'h20, 8'h4F, 8'h72, 8'h65, 8'h6A, 8'h61, 8'h73, 8'h20, // Siete Orejas
-        8'h43, 8'h65, 8'h72, 8'h72, 8'h6F, 8'h20, 8'h51, 8'h75, 8'h65, 8'h6D, 8'h61, 8'h64, 8'h6F, 8'h20, // Cerro Quemado
-        8'h54, 8'h6F, 8'h6C, 8'h69, 8'h6D, 8'h61, 8'h6E, // Toliman
-
-        8'h4C, 8'h61, 8'h73, 8'h20, 8'h56, 8'h69, 8'h62, 8'h6F, 8'h72, 8'h61, 8'h73, 8'h20, // Las Viboras
-        8'h43, 8'h75, 8'h6C, 8'h6D, 8'h61 // Culma
+        8'h41, 8'h67, 8'h75, 8'h61, 8'h20// Agua
     };
 
     reg [7:0] index = 0;
