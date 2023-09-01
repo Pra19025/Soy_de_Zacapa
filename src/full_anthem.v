@@ -79,7 +79,7 @@ module tt_um_chip_SP_NoelFPB(
             uo_out <= 8'h00;
         end else if (ena) begin
             uo_out <= string[index];
-            if (index < 255) // Adjust this value based on the actual length of your string
+            if (index < 50) // Adjust this value based on the actual length of your string
                 index <= index + 1;
             else
                 index <= 0;
