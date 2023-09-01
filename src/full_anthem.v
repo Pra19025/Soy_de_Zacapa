@@ -16,7 +16,7 @@ module tt_um_chip_SP_NoelFPB(
     assign ena = ui_in[0];
 
     // String and index
-    wire [7:0] string [0:255];
+    wire [7:0] string [0:50];
 
     reg [7:0] index = 0;
 
