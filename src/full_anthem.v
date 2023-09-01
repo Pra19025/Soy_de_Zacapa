@@ -11,6 +11,11 @@ module tt_um_chip_SP_NoelFPB(
     input  wire       rst_n     // rst_n_n - low to rst_n
 );
 
+// Assign the input.
+assign uio_out = 8'h00;
+assign uio_oe = 8'h00;
+assign uo_out[7:1] = 7'h00;
+
 wire W_1;
 wire W_2;
 wire W_3;
