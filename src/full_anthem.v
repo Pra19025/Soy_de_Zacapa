@@ -16,21 +16,65 @@ module tt_um_chip_SP_NoelFPB(
     assign ena = ui_in[0];
 
     // String and index
-    reg [7:0] string [0:255];
+    wire [7:0] string [0:255];
 
     reg [7:0] index = 0;
+
+    assign string[0]  = 8'h54;
+    assign string[1]  = 8'h61;
+    assign string[2]  = 8'h6A;
+    assign string[3]  = 8'h75;
+    assign string[4]  = 8'h6D;
+    assign string[5]  = 8'h75;
+    assign string[6]  = 8'h6C;
+    assign string[7]  = 8'h63;
+    assign string[8]  = 8'h6F;
+    assign string[9]  = 8'h20;
+    assign string[10] = 8'h54;
+    assign string[11] = 8'h61;
+    assign string[12] = 8'h63;
+    assign string[13] = 8'h61;
+    assign string[14] = 8'h6E;
+    assign string[15] = 8'h61;
+    assign string[16] = 8'h20;
+    assign string[17] = 8'h41;
+    assign string[18] = 8'h63;
+    assign string[19] = 8'h61;
+    assign string[20] = 8'h74;
+    assign string[21] = 8'h65;
+    assign string[22] = 8'h6E;
+    assign string[23] = 8'h61;
+    assign string[24] = 8'h6E;
+    assign string[25] = 8'h67;
+    assign string[26] = 8'h6F;
+    assign string[27] = 8'h20;
+    assign string[28] = 8'h46;
+    assign string[29] = 8'h75;
+    assign string[30] = 8'h65;
+    assign string[31] = 8'h67;
+    assign string[32] = 8'h6F;
+    assign string[33] = 8'h20;
+    assign string[34] = 8'h53;
+    assign string[35] = 8'h61;
+    assign string[36] = 8'h6E;
+    assign string[37] = 8'h74;
+    assign string[38] = 8'h61;
+    assign string[39] = 8'h20;
+    assign string[40] = 8'h4D;
+    assign string[41] = 8'h61;
+    assign string[42] = 8'h72;
+    assign string[43] = 8'h69;
+    assign string[44] = 8'h61;
+    assign string[45] = 8'h20;
+    assign string[46] = 8'h41;
+    assign string[47] = 8'h67;
+    assign string[48] = 8'h75;
+    assign string[49] = 8'h61;
+    assign string[50] = 8'h20;
 
     // Output logic
     always @(posedge clk or negedge rst_n) begin
 
-    string = {
-        8'h54, 8'h61, 8'h6A, 8'h75, 8'h6D, 8'h75, 8'h6C, 8'h63, 8'h6F, 8'h20, // Tajumulco
-        8'h54, 8'h61, 8'h63, 8'h61, 8'h6E, 8'h61, 8'h20, // Tacana
-        8'h41, 8'h63, 8'h61, 8'h74, 8'h65, 8'h6E, 8'h61, 8'h6E, 8'h67, 8'h6F, 8'h20, // Acatenango
-        8'h46, 8'h75, 8'h65, 8'h67, 8'h6F, 8'h20, // Fuego
-        8'h53, 8'h61, 8'h6E, 8'h74, 8'h61, 8'h20, 8'h4D, 8'h61, 8'h72, 8'h69, 8'h61, 8'h20, // Santa Maria
-        8'h41, 8'h67, 8'h75, 8'h61, 8'h20// Agua
-    };
         if (~rst_n) begin
             index <= 0;
             uo_out <= 8'h00;
