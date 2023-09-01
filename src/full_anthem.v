@@ -27,17 +27,20 @@ module tt_um_chip_SP_NoelFPB(
         8'h41, 8'h67, 8'h75, 8'h61, 8'h20// Agua
     };
 
-    always @ (posedge rst_n or posedge clk)
-    if (rst_n)
-    contador<=12'b000000000000;
-    else if(select==2'b00 || select==2'b11) begin
-        if (contador <255)
-            uo_out <= string[contador];
-            contador <= contador + 1;
-        else
+ always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            contador <= 12'b000000000000;
+        end else if (select == 2'b00 || select == 2'b11) begin
+            if (contador < 255) begin
+                uo_out <= string[contador];
+                contador <= contador + 1;
+            end else begin
+                contador <= 0;
+            end
+        end else begin
             contador <= 0;
+        end
     end
-    else
-        contador <= 0;
+
 
 endmodule
