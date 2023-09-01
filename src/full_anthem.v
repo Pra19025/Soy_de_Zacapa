@@ -20,8 +20,8 @@ wire W_1;
 wire W_2;
 wire W_3;
 
-wire clk_G;
 wire EN;
+wire EN_2;
 
 assign uo_out[0] = W_1;
 assign uo_out[1] = W_2;
