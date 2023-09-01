@@ -27,13 +27,15 @@ module tt_um_chip_SP_NoelFPB(
         if (~rst_n) begin
             index <= 0;
             uo_out <= 8'h00;
-        end else if (ena) begin
+        end 
+        else if (ena) begin
             uo_out <= string;
-            if (index < 20) // Adjust this value based on the actual length of your string
-                index <= index + 1;
-            else
-                index <= 0;
         end
+        if (index < 1) // Adjust this value based on the actual length of your string
+            index <= index + 1;
+        else
+            index <= 0;
+    
     end
 
 endmodule
