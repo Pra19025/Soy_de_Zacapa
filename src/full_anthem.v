@@ -36,6 +36,7 @@ module tt_um_chip_SP_NoelFPB(
             contador <= contador + 1;
         else
             contador <= 0;
+    end
     else
         contador <= 0;
 
