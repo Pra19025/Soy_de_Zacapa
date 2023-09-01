@@ -25,7 +25,6 @@ assign uio_oe = 8'h00;
 always @ (posedge rst_n or posedge clk)
 if (rst_n)
 contador<=12'b000000000000;
-contador<=12'b000000000000;
 else if(select==2'b00 || select==2'b11) begin
 if (contador <63)
 contador <= contador + 1;
