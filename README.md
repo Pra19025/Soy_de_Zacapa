@@ -1,55 +1,48 @@
-# Verilog Documentation for `tt_um_chip_SP_measure_delay`
+# Multi stage path for delay measurements
 
-## Overview
+## Project Details
 
-This Verilog code defines a module named `tt_um_chip_SP_measure_delay` and two additional modules `INV` and `AND_2`. The primary module is intended to function as a ring oscillator. However, it's important to note that the synthesis for the ring oscillator is not done correctly. Despite this, the module can still be used to measure the delay of a NOT gate.
+- **Language**: Verilog (Other examples include Verilog, Amaranth, VHDL, etc.)
+- **Description**: 
+    Verilog coding for cascaded not gates connected as a ring oscillator. After running the flow it is observed that the synthesizer does not support combinatorial feedback and that it collapsed several cascaded not gates into buffers. The original purpose for the ring oscillator will not be achieved but it is observed that synthesized circuit is still useful for measuring some gate delays that can be compared to theoretical calculations for educational purposes.
 
-## Modules
+## How It Works
 
-### `tt_um_chip_SP_measure_delay`
+The `ui_in` signals first two bits are used to control the transmission of the input signal through the gates all the way to the several external outputs that are taps to different gate stages as to measure different stage delays for educational purposes.
 
-#### Internal Signals
+## How to Test
 
-- **`W_1`, `W_2`, `W_3`**: Internal wires used for logic operations.
-- **`EN`, `EN_2`**: Internal enable signals derived from `ui_in`.
+One can put a square wave generator in the inputs and use a scope to measure the delay of the gates. The delay can be compared with theoretical calculations.
 
-#### Functionality
+## Inputs
 
-- The module attempts to create a ring oscillator using AND and NOT gates (`AND_2` and `INV` modules).
-- The output of the ring oscillator is connected to the first three bits of `uo_out`.
-- The module also sets `uio_out` and `uio_oe` to zero, effectively disabling bidirectional IOs.
+- EN (ui_in[0])
+- EN_2 (ui_in[1])
+- none
+- none
+- none
+- none
+- none
+- none
 
-### `INV`
+## Outputs
 
-#### Ports
+- Tap 1 (uo_out[0])
+- Tap 2 (uo_out[1])
+- Tap 3 (uo_out[2])
+- none
+- none
+- none
+- none
+- none
 
-- **`input A`**: Input signal.
-- **`output B`**: Output signal.
+## Bidirectional
 
-#### Functionality
-
-- Implements a NOT gate, inverting the input `A` to produce output `B`.
-
-### `AND_2`
-
-#### Ports
-
-- **`input in1, in2`**: Input signals.
-- **`output out`**: Output signal.
-
-#### Functionality
-
-- Implements a 2-input AND gate. The output `out` is the logical AND of `in1` and `in2`.
-
-## Limitations
-
-- The ring oscillator is not synthesized correctly, but the delay of a NOT gate (`INV` module) can still be measured.
-
-
-## Notes
-
-- The `ena`, `clk`, and `rst_n` signals are defined but not used in the current implementation. Future versions may utilize these signals for additional functionality.
-- The `uio_in`, `uio_out`, and `uio_oe` signals are also not currently used.
-- The `ui_in` signal's first two bits are used to control the ring oscillator.
-
----
+- none
+- none
+- none
+- none
+- none
+- none
+- none
+- none
