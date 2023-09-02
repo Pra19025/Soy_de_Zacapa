@@ -1,6 +1,6 @@
 `default_nettype none
 
-module tt_um_chip_SP_NoelFPB(
+module tt_um_chip_SP_volcanes(
     input  wire [7:0] ui_in,    // Dedicated inputs - connected to the input switches
     output wire [7:0] uo_out,   // Dedicated outputs - connected to the 7 segment display
     input  wire [7:0] uio_in,   // IOs: Bidirectional Input path
@@ -11,28 +11,45 @@ module tt_um_chip_SP_NoelFPB(
     input  wire       rst_n     // rst_n_n - low to rst_n
 );
 
+    reg [7:0] salida;
+
     // Assign the input.
     assign uio_out = 8'h00;
     assign uio_oe = 8'h00;
 
-    // State enumeration
-    typedef enum reg [1:0] {
-        IDLE = 2'b00,
-        RUN  = 2'b01
-    } state_type;
+    // State constants
+    parameter IDLE = 2'b00;
+    parameter RUN  = 2'b01;
 
     // State variables
-    state_type state, next_state;
+    reg [1:0] state, next_state;
 
-    // String and index
-    reg [7:0] arreglo [0:255] = {
-        8'h54, 8'h61, 8'h6A, 8'h75, 8'h6D, 8'h75, 8'h6C, 8'h63, 8'h6F, 8'h20, // Tajumulco
-        8'h54, 8'h61, 8'h63, 8'h61, 8'h6E, 8'h61, 8'h20, // Tacana
-        8'h41, 8'h63, 8'h61, 8'h74, 8'h65, 8'h6E, 8'h61, 8'h6E, 8'h67, 8'h6F, 8'h20, // Acatenango
-        8'h46, 8'h75, 8'h65, 8'h67, 8'h6F, 8'h20, // Fuego
-        8'h53, 8'h61, 8'h6E, 8'h74, 8'h61, 8'h20, 8'h4D, 8'h61, 8'h72, 8'h69, 8'h61, 8'h20, // Santa Maria
-        8'h41, 8'h67, 8'h75, 8'h61, 8'h20// Agua
-    };
+    ///------------------------
+
+    // Array and index for initialization
+    reg [7:0] arreglo [0:255];
+    reg [8:0] init_index = 0;  // 9 bits to count up to 255
+
+    // Initialize array on reset release    
+    always @(posedge clk or negedge rst_n) begin
+        if (~rst_n) begin
+            init_index <= 9'h00;
+        end else if (init_index <= 9'hFF) begin  // <= 255
+            case (init_index)
+                9'h00: arreglo[init_index] <= 8'h54;
+                9'h01: arreglo[init_index] <= 8'h61;
+                // Add more cases here for each element
+                // ...
+                9'hFF: arreglo[init_index] <= 8'h20;  // Last element (replace with actual value)
+            endcase
+            init_index <= init_index + 1;
+        end
+    end
+
+
+    ///----------------------
+
+    
 
     reg [7:0] index = 0;
 
@@ -64,9 +81,11 @@ module tt_um_chip_SP_NoelFPB(
     // Output logic
     always @(posedge clk) begin
         if (state == RUN) begin
-            uo_out <= arreglo[index];
+            salida <= arreglo[index];
             index <= index + 1;
         end
     end
+
+    assign uo_out = salida;
 
 endmodule
