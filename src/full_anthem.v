@@ -28,6 +28,7 @@ assign uo_out[1] = W_2;
 assign uo_out[2] = W_3;
 
 
+// Ring Oscilator, tiny tapeout does not synthesize this correctly.     
 assign EN = ui_in[0];
 assign EN_2 = ui_in[1];
 
