@@ -2,7 +2,7 @@
 
 ## Project Details
 
-- **Language**: Verilog (Other examples include Verilog, Amaranth, VHDL, etc.)
+- **Language**: Verilog
 - **Description**: 
     Verilog coding for cascaded not gates connected as a ring oscillator. After running the flow it is observed that the synthesizer does not support combinatorial feedback and that it collapsed several cascaded not gates into buffers. The original purpose for the ring oscillator will not be achieved but it is observed that synthesized circuit is still useful for measuring some gate delays that can be compared to theoretical calculations for educational purposes.
 
