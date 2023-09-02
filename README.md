@@ -1,35 +1,55 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/wokwi_test/badge.svg)
+# Verilog Documentation for `tt_um_chip_SP_measure_delay`
 
-# What is Tiny Tapeout?
+## Overview
 
-TinyTapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip!
+This Verilog code defines a module named `tt_um_chip_SP_measure_delay` and two additional modules `INV` and `AND_2`. The primary module is intended to function as a ring oscillator. However, it's important to note that the synthesis for the ring oscillator is not done correctly. Despite this, the module can still be used to measure the delay of a NOT gate.
 
-Go to https://tinytapeout.com for instructions!
+## Modules
 
-## How to change the Wokwi project
+### `tt_um_chip_SP_measure_delay`
 
-Edit the [info.yaml](info.yaml) and change the wokwi_id to match your project.
+#### Internal Signals
 
-## How to enable the GitHub actions to build the ASIC files
+- **`W_1`, `W_2`, `W_3`**: Internal wires used for logic operations.
+- **`EN`, `EN_2`**: Internal enable signals derived from `ui_in`.
 
-Please see the instructions for:
+#### Functionality
 
-- [Enabling GitHub Actions](https://tinytapeout.com/faq/#when-i-commit-my-change-the-gds-action-isnt-running)
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
+- The module attempts to create a ring oscillator using AND and NOT gates (`AND_2` and `INV` modules).
+- The output of the ring oscillator is connected to the first three bits of `uo_out`.
+- The module also sets `uio_out` and `uio_oe` to zero, effectively disabling bidirectional IOs.
 
-## How does it work?
+### `INV`
 
-When you edit the info.yaml to choose a different ID, the [GitHub Action](.github/workflows/gds.yaml) will fetch the digital netlist of your design from Wokwi.
+#### Ports
 
-After that, the action uses the open source ASIC tool called [OpenLane](https://www.zerotoasiccourse.com/terminology/openlane/) to build the files needed to fabricate an ASIC.
+- **`input A`**: Input signal.
+- **`output B`**: Output signal.
 
-## Resources
+#### Functionality
 
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://discord.gg/rPK2nSjxy8)
+- Implements a NOT gate, inverting the input `A` to produce output `B`.
 
-## What next?
+### `AND_2`
 
-- Share your GDS on Twitter, tag it [#tinytapeout](https://twitter.com/hashtag/tinytapeout?src=hashtag_click) and [link me](https://twitter.com/matthewvenn)!
+#### Ports
+
+- **`input in1, in2`**: Input signals.
+- **`output out`**: Output signal.
+
+#### Functionality
+
+- Implements a 2-input AND gate. The output `out` is the logical AND of `in1` and `in2`.
+
+## Limitations
+
+- The ring oscillator is not synthesized correctly, but the delay of a NOT gate (`INV` module) can still be measured.
+
+
+## Notes
+
+- The `ena`, `clk`, and `rst_n` signals are defined but not used in the current implementation. Future versions may utilize these signals for additional functionality.
+- The `uio_in`, `uio_out`, and `uio_oe` signals are also not currently used.
+- The `ui_in` signal's first two bits are used to control the ring oscillator.
+
+---
