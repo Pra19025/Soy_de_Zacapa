@@ -22,8 +22,8 @@ reg [7:0] q;
 assign uio_out = 8'h00;
 assign uio_oe = 8'h00;
 
-always @ (posedge reset or posedge clk)
-if (reset)
+always @ (posedge rst_n or posedge clk)
+if (rst_n)
 contador<=12'b000000000000;
 else if(select==2'b00 || select==2'b11) begin
 if (contador <125)
