@@ -1,35 +1,29 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/wokwi_test/badge.svg)
+ASCII Text Printer Circuit
+Author: Noel Prado, Daniel Mundo, Angel Orellana, and Julio Lopez.
+Language: Verilog
+Description: A finite state machine that is able to print two different texts. It utilizes 8 output pins, with each character printed as the ASCII character described in 8 bits.
 
-# What is Tiny Tapeout?
+How it Works
+This circuit is designed to output ASCII-encoded text sequences. The circuit can display two different texts.
 
-TinyTapeout is an educational project that aims to make it easier and cheaper than ever to get your digital designs manufactured on a real chip!
+Select Input: The select pins (ui_in[1:0]), a 2-bit binary input, determine which text sequence will be displayed:
 
-Go to https://tinytapeout.com for instructions!
+2'b00 or 2'b11: Outputs a sequence of characters that correspond to the beginning of a traditional song from Guatemala.
+2'b01 or 2'b10: Outputs a sequence of characters with the names of the people that participated in this project.
+The text is displayed character-by-character, with each character's ASCII representation determined by the current value of an internal counter. The counter increments with each clock cycle until the specified limit for the chosen text sequence is reached, at which point it resets, allowing the sequence to be displayed repetitively.
 
-## How to change the Wokwi project
+How to Test
+To test this project, one needs to use an external microcontroller, where one can read digital input pins synchronously. After reading the characters via the input pins, you can send the pins to a computer via UART communication and display the texts on the computer terminal.
 
-Edit the [info.yaml](info.yaml) and change the wokwi_id to match your project.
+Inputs
+Select bit 0: Used to define which text will be displayed.
+Select bit 1: Used to define which text will be displayed.
+None
+None
+None
+None
+None
+None
+Outputs
+All output pins are used to output the ASCII characters. As this consists of 8 bits, each pin corresponds to one bit.
 
-## How to enable the GitHub actions to build the ASIC files
-
-Please see the instructions for:
-
-- [Enabling GitHub Actions](https://tinytapeout.com/faq/#when-i-commit-my-change-the-gds-action-isnt-running)
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
-
-## How does it work?
-
-When you edit the info.yaml to choose a different ID, the [GitHub Action](.github/workflows/gds.yaml) will fetch the digital netlist of your design from Wokwi.
-
-After that, the action uses the open source ASIC tool called [OpenLane](https://www.zerotoasiccourse.com/terminology/openlane/) to build the files needed to fabricate an ASIC.
-
-## Resources
-
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://discord.gg/rPK2nSjxy8)
-
-## What next?
-
-- Share your GDS on Twitter, tag it [#tinytapeout](https://twitter.com/hashtag/tinytapeout?src=hashtag_click) and [link me](https://twitter.com/matthewvenn)!
