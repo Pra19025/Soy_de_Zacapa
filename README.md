@@ -32,7 +32,3 @@ To test this project, one needs to use an external microcontroller, where one ca
 ## Outputs
 
 All output pins are used to output the ASCII characters. As this consists of 8 bits, each pin corresponds to one bit.
-
----
-
-Note: I didn't add the "bidirectional I/O pins" section since it wasn't provided in the data. If you have information about those pins, you can add a section following the format of the "Inputs" and "Outputs" sections.
