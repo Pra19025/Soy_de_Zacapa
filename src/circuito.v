@@ -591,4 +591,3 @@ end
 end
 assign uo_out = q;
 endmodule
-
