@@ -27,13 +27,13 @@ documentation:
 
 # Longer description of how the project works. You can use standard markdown format.
   how_it_works: |
- This circuit is designed to output ASCII-encoded text sequences. The circuit can display two different texts.
+    This circuit is designed to output ASCII-encoded text sequences. The circuit can display two different texts.
 
-**Select Input**: The select pins (`ui_in[1:0]`), a 2-bit binary input, determine which text sequence will be displayed:
-- `2'b00` or `2'b11`: Outputs a sequence of characters that correspond to the beginning of a traditional song from Guatemala.
-- `2'b01` or `2'b10`: Outputs a sequence of characters with the names of the people that participated in this project.
+    **Select Input**: The select pins (`ui_in[1:0]`), a 2-bit binary input, determine which text sequence will be displayed:
+    - `2'b00` or `2'b11`: Outputs a sequence of characters that correspond to the beginning of a traditional song from Guatemala.
+    - `2'b01` or `2'b10`: Outputs a sequence of characters with the names of the people that participated in this project.
 
-The text is displayed character-by-character, with each character's ASCII representation determined by the current value of an internal counter. The counter increments with each clock cycle until the specified limit for the chosen text sequence is reached, at which point it resets, allowing the sequence to be displayed repetitively.
+    The text is displayed character-by-character, with each character's ASCII representation determined by the current value of an internal counter. The counter increments with each clock cycle until the specified limit for the chosen text sequence is reached, at which point it resets, allowing the sequence to be displayed repetitively.
 
 # Instructions on how someone could test your project, include things like what buttons do what and how to set the clock if needed
   how_to_test:  |
